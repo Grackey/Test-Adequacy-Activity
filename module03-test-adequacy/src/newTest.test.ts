@@ -1,5 +1,13 @@
 import * as db from "./transcriptManager";
 
+describe("Transcript list is initialized as an empty list", () => {
+    it('Initially transcripts list should be an empty list', () => {
+        const transcripts = db.getAll();
+        expect(transcripts.length).toEqual(0);
+        expect(transcripts).toEqual([]);
+    });
+});
+
 describe('Within database', () => {
     beforeEach(() => {
         // Before any test runs, clean up the datastore. This should ensure that tests are hermetic.
