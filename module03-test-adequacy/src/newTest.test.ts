@@ -45,7 +45,16 @@ describe('Within database', () => {
             const course = ''
             expect(() => {
                 db.getGrade(studentID, course)
-            }).toThrowError()
+            }).toThrowError(`no grade for student ${studentID} in course ${course}`)
+        })
+    })
+
+    describe('Deleting grade', () => {
+        it('Should throw an error if there is no student with ID', () => {
+            const studentID = 800
+            expect(() => {
+                db.deleteStudent(studentID)
+            }).toThrowError(`no student with ID = ${studentID}`)
         })
     })
 })
