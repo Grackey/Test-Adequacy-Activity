@@ -1,5 +1,6 @@
 import * as db from "./transcriptManager";
 
+// Needs to come first so database is not initialized
 describe("Transcript list is initialized as an empty list", () => {
     it('Initially transcripts list should be an empty list', () => {
         const transcripts = db.getAll();
