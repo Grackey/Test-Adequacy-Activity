@@ -31,6 +31,18 @@ describe('Within database', () => {
             }).toThrowError()
         })
     })
+
+    describe('Deleting students', () => {
+        it('Should correctly delete student that is not the first added', () => {
+          const studentID1 = db.addStudent('test student1');
+          const studentID2 = db.addStudent('test student2');
+          db.deleteStudent(studentID2);
+          expect(db.getTranscript(studentID2)).toBeUndefined();
+        })
+        it('Should throw an error with the correct message if the ID is invalid', ()=>{
+          expect(()=>db.deleteStudent(10)).toThrowError(`no student with ID = 10`);
+        })
+      })
 })
 
 describe('demo students are correcly added to db', () => {
