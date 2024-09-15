@@ -1,11 +1,12 @@
 import * as db from "./transcriptManager";
 
-// This test needs to come first, or else db.init will override
-describe('Runtime validation', () => {
-    it('Should start with an empty list of transcripts', () => {
-        expect(db.getAll()).toEqual([]);
-    })
-})
+describe("Transcript list is initialized as an empty list", () => {
+    it('Initially transcripts list should be an empty list', () => {
+        const transcripts = db.getAll();
+        expect(transcripts.length).toEqual(0);
+        expect(transcripts).toEqual([]);
+    });
+});
 
 describe('Within database', () => {
     beforeEach(() => {
@@ -46,7 +47,7 @@ describe('Within database', () => {
             }).toThrowError()
         })
     })
-});
+})
 
 describe('demo students are correcly added to db', () => {
     beforeAll(() => {
