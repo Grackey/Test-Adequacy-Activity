@@ -16,6 +16,7 @@ describe('TranscriptManager', () => {
       expect(ret).toEqual(1);
     });
   })
+
   describe('Adding grades', () => {
     it('should add the grade to the transcript', () => {
       const studentID = db.addStudent('test student');
@@ -27,6 +28,7 @@ describe('TranscriptManager', () => {
       expect(() => db.addGrade(1, 'test course', 100)).toThrowError();
     });
   })
+
   describe('getStudentIDs', () => {
     it('Should return only the students who match the name', () => {
       const avery1 = db.addStudent('avery');
@@ -38,6 +40,7 @@ describe('TranscriptManager', () => {
       expect(db.getStudentIDs('ripley')).toEqual([ripley]);
     })
   });
+
   describe('Deleting students', () => {
     it('Should result in the students\' transcript no longer being available', () => {
       const studentID = db.addStudent('test student');
@@ -47,10 +50,11 @@ describe('TranscriptManager', () => {
     it('Should throw an error if the ID is invalid', ()=>{
       expect(()=>db.deleteStudent(10)).toThrowError();
     })
-  })
+
   describe('getAll', () => {
     it('Should return the transcripts', () => {
       expect(db.getAll()).toEqual([]);
     });
   });
+});
 });

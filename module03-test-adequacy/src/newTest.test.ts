@@ -21,6 +21,20 @@ describe('Within database', () => {
             expect(db.getTranscript(studentID)?.grades).toEqual([]);
         });
 
+        it('Check if adding grade adds to a student at any index', () => {
+            db.addStudent('test');
+            const testID2 = db.addStudent('othertest');
+            db.addGrade(testID2, 'programming', 27);
+            expect(db.getGrade(testID2, 'programming')).toEqual(27);
+        });
+
+        it('Check if adding grade adds to a transcript at any', () => {
+            const testID2 = db.addStudent('othertest');
+            db.addGrade(testID2, 'programming', 27);
+            db.addGrade (testID2, 'test', 80 );
+            expect(db.getGrade(testID2, 'test')).toEqual(80);
+        });
+
         it('Should throw an error if there is no student with the given ID', () => {
             const fakeStudentID = 103;
             const course = 'example course'
@@ -56,8 +70,20 @@ describe('Within database', () => {
                 db.deleteStudent(studentID)
             }).toThrowError(`no student with ID = ${studentID}`)
         })
+        it('Check if deleting student deletes a student at any index', () => {
+            db.addStudent('test');
+            db.addStudent('test2')
+            const testStudent = db.addStudent('test3')
+            db.deleteStudent(testStudent);
+            expect(() => {
+                db.deleteStudent(testStudent)
+            }).toThrowError(`no student with ID = ${testStudent}`);
+        });
     })
-})
+
+
+
+});
 
 describe('demo students are correcly added to db', () => {
     beforeAll(() => {
@@ -102,4 +128,6 @@ describe('demo students are correcly added to db', () => {
         expect(caseyTranscript?.grades).toEqual([{ "course": "DemoClass", "grade": 100 }]);
         expect(caseyTranscript?.student.studentName).toEqual('casey');
     })
-})
+});
+
+
